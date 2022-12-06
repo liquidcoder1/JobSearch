@@ -1,0 +1,25 @@
+{
+  "name": "jobsearch",
+  "version": "1.0.0",
+  "description": "Search for jobs online",
+  "main": "/assets/js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "keywords": [
+    "jobs",
+    "search"
+  ],
+  "author": "John Kulimushi",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "buffer": "^5.7.1",
+    "parcel": "^2.8.0"
+  }
+}
