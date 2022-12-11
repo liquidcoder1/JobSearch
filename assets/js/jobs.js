@@ -16,7 +16,7 @@ import { createClient } from '@supabase/supabase-js'
     const isLoggedIn = async () => {
         const { data, error } = await supabase.auth.getSession()
 
-        console.log("Result signing up user: ", data.session)
+        console.log("Result getting session: ", data.session)
         console.log("Getting session error: ", error)
 
         const { data: { user } } = await supabase.auth.getUser()
@@ -31,8 +31,20 @@ import { createClient } from '@supabase/supabase-js'
         return user
     }
 
+    const checkLoginStatus = async () => {
+        console.log("is logged in: ", isLoggedIn())
+        if (await isLoggedIn()) {
+            let user = await currentUser()
+            console.log(user.email)
+        } else {
+            window.location.href = "/pages/login.html" 
+        }
+    }
+
+    checkLoginStatus()
+
     const apply = async (job) => {
-        if (isLoggedIn) {
+        if (await isLoggedIn()) {
             let user = await currentUser()
 
             let application = {

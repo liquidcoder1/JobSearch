@@ -26,7 +26,7 @@ import { createClient } from '@supabase/supabase-js'
     }
 
     const checkLoginStatus = async () => {
-        if (isLoggedIn) {
+        if (await isLoggedIn()) {
             let user = await currentUser()
             console.log(user.email)
         } else {
@@ -36,9 +36,9 @@ import { createClient } from '@supabase/supabase-js'
 
     checkLoginStatus()
 
-    document.getElementById("logoutButton").onclick = function async () {
-        // Implement me
-        console.log("To be implemeted")
+    document.getElementById("logoutButton").onclick =  async () => {
+        const { error } = await supabase.auth.signOut()
+            console.log(error)
     }
 
     const fetchJobs = async () => {

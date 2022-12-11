@@ -27,8 +27,8 @@ import { createClient } from '@supabase/supabase-js'
         return data.session !== null
     }
 
-    const redirectToAccount = () => {
-        if (isLoggedIn) {
+    const redirectToAccount = async () => {
+        if (await isLoggedIn()) {
             window.location.href = "/pages/account.html"
         }
     }
