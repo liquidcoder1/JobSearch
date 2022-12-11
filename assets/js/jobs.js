@@ -31,18 +31,6 @@ import { createClient } from '@supabase/supabase-js'
         return user
     }
 
-    const checkLoginStatus = async () => {
-        console.log("is logged in: ", isLoggedIn())
-        if (await isLoggedIn()) {
-            let user = await currentUser()
-            console.log(user.email)
-        } else {
-            window.location.href = "/pages/login.html" 
-        }
-    }
-
-    checkLoginStatus()
-
     const apply = async (job) => {
         if (await isLoggedIn()) {
             let user = await currentUser()
@@ -60,18 +48,22 @@ import { createClient } from '@supabase/supabase-js'
             console.log(application)
             const result = await supabase.from('applications').insert(application)
         } else {
-            window.location.href = "/pages/account.html"
+            window.location.href = "/pages/login.html"
         }
     }
 
     const appliedJobs = async () => {
-        let user = await currentUser()
-        const { data, error } = await supabase
-            .from('applications')
-            .select()
-            .eq('user_id', user.id)
+        if (await isLoggedIn()) {
+            let user = await currentUser()
+            const { data, error } = await supabase
+                .from('applications')
+                .select()
+                .eq('user_id', user.id)
+    
+            return data   
+        }
 
-        return data
+        return []
     }
 
     const displayJobs = async () => {
