@@ -24,10 +24,10 @@ const supabase = createClient("https://vcwwqiizaifrxeowywri.supabase.co", "eyJhb
       return data.session !== null
   }
 
-  const customiseLoginButton = () => {
+  const customiseLoginButton = async () => {
     let loginButton = document.getElementById("loginButton")
 
-    if (isLoggedIn) {
+    if (await isLoggedIn()) {
       loginButton.innerText = "Logout"
     } else {
       loginButton.innerText = "Login"

@@ -11,7 +11,7 @@ import { createClient } from '@supabase/supabase-js'
     }
 
     const supabase = createClient("https://vcwwqiizaifrxeowywri.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjd3dxaWl6YWlmcnhlb3d5d3JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAzNTQyMDQsImV4cCI6MTk4NTkzMDIwNH0.IcTDXl23rGv5qc2yWirOnLu-KGfrJrib19xbRjKE6tw", options)
-
+    let currentPageIndex = 1
 
     const isLoggedIn = async () => {
         const { data, error } = await supabase.auth.getSession()
@@ -66,102 +66,122 @@ import { createClient } from '@supabase/supabase-js'
         return []
     }
 
-    const displayJobs = async () => {
+    const fetchJobPage = async () => {
 
-        let jobs = await appliedJobs()
+        let usersJobs = await appliedJobs()
+        $("#loadingElement").loading();
 
-        fetch('https://www.themuse.com/api/public/jobs?page=1&descending=true', {
+        const opts = {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
             },
-        })
-            .then(response => response.json())
-            .then(json => {
+        }
 
-                json.results.forEach(job => {
+        const response = await fetch('https://www.themuse.com/api/public/jobs?page='+currentPageIndex+'&descending=true', opts)
+        const jobs = await response.json()
 
-                    let isApplied = false
+        $("#loadingElement").loading('stop')
+        $("#loadingElement").hide()
 
-                    jobs.forEach(j => {
-                        if (j.job_id === job.id) {
-                            isApplied = true;
-                        }
-                    });
+        // document.getElementById("jobContainer")
+                                
 
-                    let card = document.createElement("div")
-                    card.className = "card shadow-lg p-3 bg-body rounded"
+        jobs.results.forEach(job => {
 
-                    let jobTitle = document.createElement("h4")
-                    jobTitle.className = "job_title fw-bold"
-                    jobTitle.innerHTML = job.name
+            let isApplied = false
 
-                    let jobCompany = document.createElement("h6")
-                    jobCompany.className = "job_company fw-bold text-secondary"
-                    jobCompany.innerHTML = job.company.name
+            usersJobs.forEach(j => {
+                if (j.job_id === job.id) {
+                    isApplied = true;
+                }
+            });
 
-                    let jobDescription = document.createElement("p")
-                    jobDescription.className = "job_description text-secondary"
-                    // jobDescription.innerHTML = job.contents
+            let card = document.createElement("div")
+            card.className = "card shadow-lg p-3 bg-body rounded"
 
-                    let jobDetails = document.createElement("p")
-                    jobDetails.className = "job_details"
+            let jobTitle = document.createElement("h4")
+            jobTitle.className = "job_title fw-bold"
+            jobTitle.innerHTML = job.name
 
-                    let jobLocation = document.createElement("span")
-                    jobLocation.className = "job_location  me-2"
+            let jobCompany = document.createElement("h6")
+            jobCompany.className = "job_company fw-bold text-secondary"
+            jobCompany.innerHTML = job.company.name
 
-                    job.locations.forEach(loc => {
+            let jobDescription = document.createElement("p")
+            jobDescription.className = "job_description text-secondary"
+            // jobDescription.innerHTML = job.contents
 
-                        let location = document.createElement("span")
-                        location.className = "job_location badge bg-success"
-                        location.innerHTML = loc.name
+            let jobDetails = document.createElement("p")
+            jobDetails.className = "job_details"
 
-                        jobLocation.append(location)
-                    });
+            let jobLocation = document.createElement("span")
+            jobLocation.className = "job_location  me-2"
 
-                    let jobCategory = document.createElement("span")
-                    jobCategory.className = "job_category me-2"
+            job.locations.forEach(loc => {
 
-                    job.categories.forEach(cat => {
+                let location = document.createElement("span")
+                location.className = "job_location badge bg-success"
+                location.innerHTML = loc.name
 
-                        let category = document.createElement("span")
-                        category.className = "job_category px-2 badge bg-dark"
-                        category.innerHTML = cat.name
-                        jobCategory.append(category)
+                jobLocation.append(location)
+            });
 
-                    });
+            let jobCategory = document.createElement("span")
+            jobCategory.className = "job_category me-2"
 
-                    let jobLevel = document.createElement("span")
-                    jobLevel.className = "job_level  me-2"
+            job.categories.forEach(cat => {
 
-                    job.levels.forEach(lev => {
+                let category = document.createElement("span")
+                category.className = "job_category px-2 badge bg-dark"
+                category.innerHTML = cat.name
+                jobCategory.append(category)
 
-                        let level = document.createElement("span")
-                        level.className = "job_level badge bg-warning"
-                        level.innerHTML = lev.name
+            });
 
-                        jobLevel.append(level)
-                    });
+            let jobLevel = document.createElement("span")
+            jobLevel.className = "job_level  me-2"
 
-                    let applyButton = document.createElement("button")
-                    applyButton.className = isApplied ? "btn btn-secondary" : "btn btn-primary"
-                    applyButton.textContent = isApplied ? "Applied" : "Apply"
+            job.levels.forEach(lev => {
 
-                    applyButton.onclick = function () {
-                        if (!isApplied) {
-                            apply(job)   
-                        }
-                    }
+                let level = document.createElement("span")
+                level.className = "job_level badge bg-warning"
+                level.innerHTML = lev.name
 
-                    jobDetails.append(jobLocation, jobCategory, jobLevel)
+                jobLevel.append(level)
+            });
 
-                    card.append(jobTitle, jobCompany, jobDescription, jobDetails, applyButton)
+            let applyButton = document.createElement("button")
+            applyButton.className = isApplied ? "btn btn-secondary" : "btn btn-primary"
+            applyButton.textContent = isApplied ? "Applied" : "Apply"
 
-                    document.getElementById("jobContainer").appendChild(card)
-                });
-            })
+            applyButton.onclick = function () {
+                if (!isApplied) {
+                    apply(job)   
+                }
+            }
+
+            jobDetails.append(jobLocation, jobCategory, jobLevel)
+            card.append(jobTitle, jobCompany, jobDescription, jobDetails, applyButton)
+            document.getElementById("jobContainer").appendChild(card)
+
+        });
+
     }
 
-    displayJobs()
+    const pagination = async () => {
+
+        const nextPage = document.getElementById("nextPage")
+
+        fetchJobPage()
+
+        nextPage.onclick = async () => {
+            currentPageIndex += 1
+            fetchJobPage()
+        }
+
+    }
+
+    pagination()
 
 })()

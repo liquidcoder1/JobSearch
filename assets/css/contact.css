@@ -1,0 +1,100 @@
+#headerDiv {
+	text-align:center;	
+	font-family: "Poppins", sans-serif;
+	font-weight: 350;
+}
+
+#MainButton {
+	background-color: #00bcb4;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 1px #02837f;
+	color: #fff;
+	display: inline-block;
+	outline: none;
+	padding: 12px 24px;
+	text-align: center;
+	font-family: "Poppins", sans-serif;
+	font-size: 1rem;
+	font-weight: 700;
+	
+}
+
+#MainButton:hover {
+	background-color:rgb(100, 400, 200);
+
+}
+
+#SubmitButton {
+	margin: 1rem;
+	padding: 3px;
+
+}
+
+#container {
+	text-align: center;
+}
+
+.row{
+	padding: 1px;
+	text-align: left;
+	border-bottom: 1px solid black;
+}
+
+.EmailDivs {
+	padding: 10px;
+	margin: 20px;
+}
+
+.forms {
+	margin: auto;
+	width: 30%;
+	border: solid;
+	border-color:#16507b;
+	padding: 10px;
+	position:relative;
+	top: 15px;
+}
+
+input:hover{
+	border-left: 1px solid black;
+}
+
+input {
+	border:none;
+	background: transparent;
+}
+
+
+.logo {
+	font-size: 28px;
+	margin: 0;
+	padding: 20;
+	line-height: 1;
+	font-weight: 300;
+	letter-spacing: 0.5px;
+	font-family: "Poppins", sans-serif;
+	
+    
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+ } 
+  
+.logo a {
+	color: #16507b;
+	text-decoration: none;
+}
+  
+.logo img {
+	max-height: 40px;
+}
+  
+@media (max-width: 992px) {
+	#header .logo {
+		font-size: 28px;
+	}
+}

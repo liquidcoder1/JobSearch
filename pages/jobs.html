@@ -11,6 +11,7 @@
     <!-- Vendor CSS Files -->
     <link href="/assets/external/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/external/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <script src="/assets/css/loading.css"></script>
 </head>
 
 <body>
@@ -27,22 +28,14 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
         </div>
-
+        <div id="loadingElement"></div>
         <div id="jobContainer" class="cardGripContainer mt-4">
-           
+          
         </div>
-        <nav aria-label="...">
+        <nav class="mt-4">
           <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#">2 </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-              <a class="page-link" href="#">Next</a>
+              <button class="page-link" id="nextPage">Load more</button>
             </li>
           </ul>
         </nav>
@@ -50,6 +43,8 @@
 
     <!-- JS Script File  -->
     <script src="/assets/js/jobs.js" type="module"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/loading.js"></script>
 </body>
 
 </html>

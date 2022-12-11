@@ -3,9 +3,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/contact.css">
     <title>Contact</title>
 </head>
 <body>
-    <h1>Contact form goes here</h1>
+	<h1 class="logo"><a href="/index.html">Job Search</a></h1>
+	
+	<div id = "HeaderDiv">
+		<h1>Contact Us</h1>
+		<p> Jobseeker or Employer - we would love to hear from you </p>
+	</div>
+	
+	<div id = "container">
+		<div id = "Employer" class = "EmailDivs">
+			Employer - <button id = "MainButton" type="button" onclick = "displayEmployerForm()"> Advertise a Job </button>
+			<div id = "EmployerForm" class ="Forms" style="display:none">
+				<div class = "row">
+					Company Name <input type="text">
+				</div>	
+				<br>
+				<div class = "row">
+					First Name <input type="text">
+				</div>
+				<br>
+				<div class = "row">
+					Last Name <input type="text">
+				</div>
+				<br>
+				<div class = "row">
+					Email <input type="text">
+				</div>
+				<br>
+				<div class = "row">
+					Phone <input type="text">
+				</div>
+				<br>
+				<button id = "SubmitButton" onclick = "submit()"> Submit </button>
+			</div>
+		</div>
+		
+		<div id = "Jobseeker" class = "EmailDivs">
+			Jobseeker - <button id = "MainButton" type="button" onclick = "displayJobseekerForm()"> Email Us </button>
+			<div id = "JobseekerForm" class ="Forms" style="display:none">
+				<div class = "row">
+					First Name <input type="text">
+				</div>	
+				<br>
+				<div class = "row">
+					Last Name  <input type="text">
+				</div>
+				<br>
+				<div class = "row">
+					Email <input type="text">
+				</div>
+				<br>
+				<div class = "row">
+					Phone <input type="text">
+				</div>	
+				<br>
+				<button id = "SubmitButton" onclick = "submit()"> Submit </button>
+			</div>
+		</div>
+	</div>
+	<!-- JS Script File  -->
+	<script src="/assets/js/contact.js"></script>	
 </body>
 </html>
