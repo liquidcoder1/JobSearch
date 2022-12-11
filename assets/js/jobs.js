@@ -40,7 +40,7 @@ import { createClient } from '@supabase/supabase-js'
                 user_id: user.id,
                 job_name: job.name,
                 job_id: job.id,
-                job_company: job.company,
+                job_company: job.company.name,
                 job_location: job.locations[0].name,
                 job_category: job.categories[0].name,
                 job_level: job.levels[0].name
@@ -144,7 +144,7 @@ import { createClient } from '@supabase/supabase-js'
                     applyButton.textContent = isApplied ? "Applied" : "Apply"
 
                     applyButton.onclick = function () {
-                        if (!applied) {
+                        if (!isApplied) {
                             apply(job)   
                         }
                     }
