@@ -2,33 +2,48 @@ import { createClient } from '@supabase/supabase-js'
 
 (function () {
 
+    /**
+     * Supabase options
+     */
     const options = {
         db: { schema: 'public' },
         auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true },
         global: { headers: { 'x-my-custom-header': 'my-app-name' } },
     }
 
+    /**
+     * Create a single supabase client for interacting with your database
+     */
     const supabase = createClient("https://vcwwqiizaifrxeowywri.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjd3dxaWl6YWlmcnhlb3d5d3JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAzNTQyMDQsImV4cCI6MTk4NTkzMDIwNH0.IcTDXl23rGv5qc2yWirOnLu-KGfrJrib19xbRjKE6tw", options)
 
+    /**
+     * Checks whether the current user is logged in
+     * @returns a boolean value indicating whether the user is logged in or not by checking if the session is not null
+     */
     const isLoggedIn = async () => {
         const { data, error } = await supabase.auth.getSession()
         return data.session !== null
     }
 
+    /**
+     * fetches and returns the current user
+     * @returns the current user
+     */
     const currentUser = async () => {
         const { data: { user } } = await supabase.auth.getUser()
         if (user === null) {
             const { error } = await supabase.auth.signOut()
-            console.log(error)
             checkLoginStatus()
         }
         return user        
     }
 
+    /**
+     * Checks whether the user is logged in, if not redirect him to the login page
+     */
     const checkLoginStatus = async () => {
         if (await isLoggedIn()) {
             let user = await currentUser()
-            console.log(user.email)
         } else {
             window.location.href = "/pages/login.html" 
         }
@@ -38,7 +53,6 @@ import { createClient } from '@supabase/supabase-js'
 
     document.getElementById("logoutButton").onclick =  async () => {
         const { error } = await supabase.auth.signOut()
-            console.log(error)
     }
 
     const fetchJobs = async () => {
@@ -51,6 +65,9 @@ import { createClient } from '@supabase/supabase-js'
         return data
     }
 
+    /**
+     * Display users applied jobs
+     */
     const displayJobs = async () => {
         let jobs = await fetchJobs()
 

@@ -4,33 +4,46 @@ import { createClient } from '@supabase/supabase-js'
 (function () {
     "use strict";
 
+    /*
+        Supabase options
+    */
     const options = {
         db: { schema: 'public' },
-        auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true },
-        global: { headers: { 'x-my-custom-header': 'my-app-name' } },
+        auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
     }
 
+    /**
+     * Create a single supabase client for interacting with your database
+     */
     const supabase = createClient("https://vcwwqiizaifrxeowywri.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjd3dxaWl6YWlmcnhlb3d5d3JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAzNTQyMDQsImV4cCI6MTk4NTkzMDIwNH0.IcTDXl23rGv5qc2yWirOnLu-KGfrJrib19xbRjKE6tw", options)
+
+    /**
+     * Tracks current page index of the jobs rest api
+     */
     let currentPageIndex = 1
 
+    /**
+     * Checks whether the current user is logged in
+     * @returns a boolean value indicating whether the user is logged in or not by checking if the session is not null
+     */
     const isLoggedIn = async () => {
         const { data, error } = await supabase.auth.getSession()
-
-        console.log("Result getting session: ", data.session)
-        console.log("Getting session error: ", error)
-
-        const { data: { user } } = await supabase.auth.getUser()
-
-        console.log("Current user: ", user)
-
         return data.session !== null
     }
 
+    /**
+     * fetches and returns the current user
+     * @returns the current user
+     */
     const currentUser = async () => {
         const { data: { user } } = await supabase.auth.getUser()
         return user
     }
 
+    /**
+     * Applies to the given job by saving the details in the database
+     * @param {JobObject} job job object 
+     */
     const apply = async (job) => {
         if (await isLoggedIn()) {
             let user = await currentUser()
@@ -52,6 +65,10 @@ import { createClient } from '@supabase/supabase-js'
         }
     }
 
+    /**
+     * Fetches and returns applied jobs for the current user
+     * @returns An array of jobs that the current user has applied to
+     */
     const appliedJobs = async () => {
         if (await isLoggedIn()) {
             let user = await currentUser()
@@ -59,13 +76,16 @@ import { createClient } from '@supabase/supabase-js'
                 .from('applications')
                 .select()
                 .eq('user_id', user.id)
-    
-            return data   
+
+            return data
         }
 
         return []
     }
 
+    /**
+     * Fetch a single jobs page from the rest api
+     */
     const fetchJobPage = async () => {
 
         let usersJobs = await appliedJobs()
@@ -78,14 +98,14 @@ import { createClient } from '@supabase/supabase-js'
             },
         }
 
-        const response = await fetch('https://www.themuse.com/api/public/jobs?page='+currentPageIndex+'&descending=true', opts)
+        const response = await fetch('https://www.themuse.com/api/public/jobs?page=' + currentPageIndex + '&descending=true', opts)
         const jobs = await response.json()
 
         $("#loadingElement").loading('stop')
         $("#loadingElement").hide()
 
         // document.getElementById("jobContainer")
-                                
+
 
         jobs.results.forEach(job => {
 
@@ -97,78 +117,82 @@ import { createClient } from '@supabase/supabase-js'
                 }
             });
 
-            let card = document.createElement("div")
-            card.className = "card shadow-lg p-3 bg-body rounded"
+            const card = document.createElement("div")
+            card.className = "card shadow-lg p-3 bg-body d-flex flex-column rounded"
 
-            let jobTitle = document.createElement("h4")
-            jobTitle.className = "job_title fw-bold"
+            const cardBody = document.createElement("div")
+            cardBody.className = "card-body d-flex flex-column"
+
+            const jobTitle = document.createElement("h4")
+            jobTitle.className = "card-title job_title fw-bold"
             jobTitle.innerHTML = job.name
 
-            let jobCompany = document.createElement("h6")
+            const jobCompany = document.createElement("h6")
             jobCompany.className = "job_company fw-bold text-secondary"
             jobCompany.innerHTML = job.company.name
 
-            let jobDescription = document.createElement("p")
-            jobDescription.className = "job_description text-secondary"
-            // jobDescription.innerHTML = job.contents
-
-            let jobDetails = document.createElement("p")
+            const jobDetails = document.createElement("p")
             jobDetails.className = "job_details"
 
-            let jobLocation = document.createElement("span")
-            jobLocation.className = "job_location  me-2"
+            const jobLocation = document.createElement("span")
+            jobLocation.className = "job_location badge bg-success  me-2"
+            jobLocation.innerHTML = job.locations[0].name
 
-            job.locations.forEach(loc => {
+            const jobCategory = document.createElement("span")
+            jobCategory.className = "job_category px-2 badge bg-dark me-2"
+            jobCategory.innerHTML = job.categories[0].name
 
-                let location = document.createElement("span")
-                location.className = "job_location badge bg-success"
-                location.innerHTML = loc.name
+            const jobLevel = document.createElement("span")
+            jobLevel.className = "job_level badge bg-warning me-2"
+            jobLevel.innerHTML = job.levels[0].name
 
-                jobLocation.append(location)
-            });
-
-            let jobCategory = document.createElement("span")
-            jobCategory.className = "job_category me-2"
-
-            job.categories.forEach(cat => {
-
-                let category = document.createElement("span")
-                category.className = "job_category px-2 badge bg-dark"
-                category.innerHTML = cat.name
-                jobCategory.append(category)
-
-            });
-
-            let jobLevel = document.createElement("span")
-            jobLevel.className = "job_level  me-2"
-
-            job.levels.forEach(lev => {
-
-                let level = document.createElement("span")
-                level.className = "job_level badge bg-warning"
-                level.innerHTML = lev.name
-
-                jobLevel.append(level)
-            });
-
-            let applyButton = document.createElement("button")
-            applyButton.className = isApplied ? "btn btn-secondary" : "btn btn-primary"
+            const applyButton = document.createElement("button")
+            applyButton.className = isApplied ? "btn me-2 col btn-secondary" : "btn me-2 col btn-info"
             applyButton.textContent = isApplied ? "Applied" : "Apply"
+
+            const learnMoreButton = document.createElement("button")
+            learnMoreButton.type = "button"
+            learnMoreButton.innerHTML = "Learn more"
+            learnMoreButton.className = "btn  col btn-outline-info"
+            learnMoreButton.setAttribute("data-bs-toggle", "modal");
+            learnMoreButton.setAttribute("data-bs-target", "#jobContentModal");
+            learnMoreButton.setAttribute("data-bs-jobid", job.id);
+
+            const buttons = document.createElement("div")
+            buttons.className = "row  m-3"
 
             applyButton.onclick = function () {
                 if (!isApplied) {
-                    apply(job)   
+                    apply(job)
                 }
             }
 
+            document.getElementById("jobContentModal").addEventListener('show.bs.modal', function (event) {                            
+                var button = event.relatedTarget
+                var jobID = button.getAttribute('data-bs-jobid')
+                
+                if (""+job.id === jobID) {
+                    const modalBody = document.getElementById("modelBody")
+                    modalBody.innerHTML = job.contents
+                    const modalTitle = document.getElementById("modalTitle")
+                    modalTitle.innerHTML = job.name                        
+                }
+            })
+
+            buttons.append(applyButton, learnMoreButton)
             jobDetails.append(jobLocation, jobCategory, jobLevel)
-            card.append(jobTitle, jobCompany, jobDescription, jobDetails, applyButton)
+            cardBody.append(jobTitle, jobCompany, jobDetails)
+            card.append(cardBody, buttons)
+
             document.getElementById("jobContainer").appendChild(card)
 
         });
 
     }
 
+    /**
+     * Initiates and processes jobs pagination
+     */
     const pagination = async () => {
 
         const nextPage = document.getElementById("nextPage")
@@ -179,7 +203,6 @@ import { createClient } from '@supabase/supabase-js'
             currentPageIndex += 1
             fetchJobPage()
         }
-
     }
 
     pagination()

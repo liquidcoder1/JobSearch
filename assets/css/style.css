@@ -8,12 +8,12 @@ body {
 }
 
 a {
-  color: #2487ce;
+  color: #20c997;
   text-decoration: none;
 }
 
 a:hover {
-  color: #469fdf;
+  color: #20c997;
   text-decoration: none;
 }
 
@@ -95,7 +95,7 @@ h6 {
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 14px;
-  color: #16507b;
+  color: #096348;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -111,12 +111,12 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #2487ce;
+  color: #20c997;
 }
 
 .navbar .getstarted,
 .navbar .getstarted:focus {
-  background: #2487ce;
+  background: #20c997;
   padding: 8px 20px;
   margin-left: 30px;
   border-radius: 4px;
@@ -126,7 +126,7 @@ h6 {
 .navbar .getstarted:hover,
 .navbar .getstarted:focus:hover {
   color: #fff;
-  background: #3194db;
+  background: #20c997;
 }
 
 @media (max-width: 1366px) {
@@ -137,7 +137,7 @@ h6 {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #124265;
+  color: #139f75;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -166,7 +166,7 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(10, 38, 58, 0.9);
+  background: #096348;
   transition: 0.3s;
   z-index: 999;
 }
@@ -194,13 +194,13 @@ h6 {
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #124265;
+  color: #096348;
 }
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #2487ce;
+  color: #20c997;
 }
 
 .navbar-mobile .getstarted,
@@ -259,11 +259,11 @@ h6 {
   transition: 0.5s;
   margin-top: 30px;
   color: #fff;
-  background: #2487ce;
+  background: #20c997;
 }
 
 #hero .btn-get-started:hover {
-  background: #3194db;
+  background: #096348;
 }
 
 #hero .icon-boxes {
@@ -298,22 +298,12 @@ h6 {
   margin-bottom: 0;
 }
 
-#hero .icon-box .icon {
-  margin-bottom: 20px;
-  padding-top: 10px;
-  display: inline-block;
-  transition: all 0.3s ease-in-out;
-  font-size: 36px;
-  line-height: 1;
-  color: #2487ce;
-}
-
 #hero .icon-box:hover {
   transform: scale(1.08);
 }
 
 #hero .icon-box:hover .title a {
-  color: #2487ce;
+  color: #20c997;
 }
 
 @media (min-width: 1024px) {
@@ -411,13 +401,13 @@ section {
 
 .team .member .social a {
   transition: color 0.3s;
-  color: #124265;
+  color: #096348;
   margin: 0 10px;
   display: inline-block;
 }
 
 .team .member .social a:hover {
-  color: #2487ce;
+  color: #20c997;
 }
 
 .team .member .social i {
@@ -434,7 +424,7 @@ section {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 18px;
-  color: #124265;
+  color: #096348;
 }
 
 .team .member .member-info span {
@@ -535,7 +525,7 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px 2px 20px;
-  background: #2487ce;
+  background: #20c997;
   color: #fff;
   transition: 0.3s;
   border-radius: 0 5px 5px 0;
@@ -543,13 +533,13 @@ section {
 }
 
 #footer .footer-newsletter form input[type=submit]:hover {
-  background: #3194db;
+  background: #096348;
 }
 
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #2487ce;
+  background: #20c997;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -562,7 +552,7 @@ section {
 }
 
 #footer .social-links a:hover {
-  background: #3194db;
+  background: #096348;
   color: #fff;
   text-decoration: none;
 }
