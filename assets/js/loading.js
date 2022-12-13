@@ -1,5 +1,4 @@
 
-// import "./loading.css";
 
 const Loading = function(element, options) {
   this.element = element;

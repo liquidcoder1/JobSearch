@@ -29,7 +29,9 @@
           <li><a class="nav-link active" href="/pages/account.html">Account</a></li>
           <li><a class="getstarted btn btn-info" id="loginButton" href="/pages/login.html">Login</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        <button class="btn btn-outline" id="menuToggler">
+            <i class="bi bi-list mobile-nav-toggle" ></i>
+          </button>
       </nav><!-- .navbar -->
 
     </div>
@@ -48,6 +50,7 @@
                                     <h3 class="mb-4">Log In</h3>
                                 </div>
                             </div>
+                            <p class="text-danger" id="signinErrorMsg"></p>
                             <form id="signInForm" class="signin-form">
                                 <div class="form-group mt-3">
                                     <input type="text" name="username" class="form-control" required>
@@ -72,4 +75,5 @@
 </body>
 
 <script src="/assets/js/auth.js" type="module"></script>
+<script src="/assets/js/header.js"></script>
 </html>

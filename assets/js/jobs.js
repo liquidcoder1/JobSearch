@@ -104,9 +104,6 @@ import { createClient } from '@supabase/supabase-js'
         $("#loadingElement").loading('stop')
         $("#loadingElement").hide()
 
-        // document.getElementById("jobContainer")
-
-
         jobs.results.forEach(job => {
 
             let isApplied = false

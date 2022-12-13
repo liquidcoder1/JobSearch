@@ -30,7 +30,9 @@
           <li><a class="nav-link" href="/pages/contact.html">Contact</a></li>
           <li><a class="nav-link active" href="/pages/account.html">Account</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        <button class="btn btn-outline" id="menuToggler">
+          <i class="bi bi-list mobile-nav-toggle" ></i>
+        </button>
       </nav><!-- .navbar -->
 
     </div>
@@ -44,19 +46,18 @@
               <form class="d-flex mt-2">
                 <button id="logoutButton" class="btn btn-info" type="submit">Log out</button>
               </form>
-            <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
         </div>        
+
+        <!-- Job list -->
         <div class="jobs">
-          <div id="jobContainer" class="cardGripContainer mt-4">
-            
-            
-         </div>
-        </div>
+          <div id="jobContainer" class="cardGripContainer mt-4"> </div>
+        </div><!-- End Job list -->
     </div>
 
     <!-- JS Script File  -->
     <script src="/assets/js/account.js" type="module"></script>
+    <script src="/assets/js/header.js"></script>
 </body>
 
 </html>

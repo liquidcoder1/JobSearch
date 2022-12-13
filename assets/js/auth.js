@@ -49,6 +49,14 @@ import { createClient } from '@supabase/supabase-js'
             email: email,
             password: password,
         })
+
+        if (data) {
+            await redirectToAccount()
+        }
+
+        if (error) {
+            document.getElementById("signinErrorMsg").innerHTML = error
+        }
     }
 
     /**
@@ -62,8 +70,15 @@ import { createClient } from '@supabase/supabase-js'
             password: password
         })
 
-        const result = await supabase.from('users').insert({user_id: data.user.id})
-        console.log("Result saving user",result)
+        if (data.user) {
+            const result = await supabase.from('users').insert({user_id: data.user.id})
+            await redirectToAccount()
+        }
+
+        if (error !== null) {
+            document.getElementById("signupErrorMsg").innerHTML = error
+        }
+
     }
 
     /**

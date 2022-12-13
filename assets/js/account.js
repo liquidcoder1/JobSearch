@@ -8,7 +8,6 @@ import { createClient } from '@supabase/supabase-js'
     const options = {
         db: { schema: 'public' },
         auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true },
-        global: { headers: { 'x-my-custom-header': 'my-app-name' } },
     }
 
     /**
@@ -53,6 +52,7 @@ import { createClient } from '@supabase/supabase-js'
 
     document.getElementById("logoutButton").onclick =  async () => {
         const { error } = await supabase.auth.signOut()
+        console.log(error)
     }
 
     const fetchJobs = async () => {

@@ -30,7 +30,9 @@
           <li><a class="nav-link active" href="/pages/account.html">Account</a></li>
           <li><a class="getstarted btn btn-info" id="loginButton" href="/pages/login.html">Login</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        <button class="btn btn-outline" id="menuToggler">
+            <i class="bi bi-list mobile-nav-toggle" ></i>
+          </button>
       </nav><!-- .navbar -->
 
     </div>
@@ -49,6 +51,8 @@
                                     <h3 class="mb-4">Sign Up</h3>
                                 </div>
                             </div>
+                            <p class="text-danger" id="signupErrorMsg"></p>
+
                             <form id="signUpForm" class="signin-form">
                                 <div class="form-group mt-3">
                                     <label class="form-control-placeholder"  for="username">Username</label>
@@ -74,5 +78,6 @@
 </body>
 
 <script src="/assets/js/auth.js" type="module"></script>
+<script src="/assets/js/header.js"></script>
 
 </html>
