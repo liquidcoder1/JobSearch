@@ -6,31 +6,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobs</title>
-    <link rel="stylesheet" href="/assets/css/jobs.css">
-    <!-- Vendor CSS Files -->
+    <meta content="Search for jobs" name="description">
+    <meta content="jobs, jobseekers, employment, search jobs" name="keywords">
+    <title>Job Search - Account</title>
     <link href="/assets/external/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/external/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/jobs.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
 </head>
 
 <body>
+  <!-- ****** Header ****** -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
 
-    <div class="container">
+      <h1 class="logo"><a href="/index.html" class="link-info">Job Search</a></h1>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link" href="/">Home</a></li>
+          <li><a class="nav-link" href="/pages/jobs.html">Jobs</a></li>
+          <li><a class="nav-link" href="/pages/contact.html">Contact</a></li>
+          <li><a class="nav-link active" href="/pages/account.html">Account</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+    <div class="container" style="padding-top: 100px;">
         <div class="d-flex align-items-center justify-content-between">
 
-        <h1 class="logo"><a href="/index.html">Account</a></h1>
+        <h3 class="logo">My applications</h3>
         <nav id="navbar" class="navbar">
               <form class="d-flex mt-2">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button id="logoutButton" class="btn btn-info" type="submit">Log out</button>
               </form>
             <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
-        </div>
-        <button id="logoutButton" class="btn btn-primary">Logout</button>
-        
+        </div>        
         <div class="jobs">
-          <h3>My applications</h3>
           <div id="jobContainer" class="cardGripContainer mt-4">
             
             

@@ -23,14 +23,7 @@ import { createClient } from '@supabase/supabase-js'
    */
   const isLoggedIn = async () => {
     const { data, error } = await supabase.auth.getSession()
-
-    console.log("Result signing up user: ", data.session)
-    console.log("Getting session error: ", error)
-
     const { data: { user } } = await supabase.auth.getUser()
-
-    console.log("Current user: ", user)
-
     return data.session !== null
   }
 

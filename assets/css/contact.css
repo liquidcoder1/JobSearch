@@ -4,33 +4,6 @@
 	font-weight: 350;
 }
 
-#MainButton {
-	background-color: #00bcb4;
-	border: none;
-	border-radius: 3px;
-	box-shadow: 0 1px #02837f;
-	color: #fff;
-	display: inline-block;
-	outline: none;
-	padding: 12px 24px;
-	text-align: center;
-	font-family: "Poppins", sans-serif;
-	font-size: 1rem;
-	font-weight: 700;
-	
-}
-
-#MainButton:hover {
-	background-color:rgb(100, 400, 200);
-
-}
-
-#SubmitButton {
-	margin: 1rem;
-	padding: 3px;
-
-}
-
 #container {
 	text-align: center;
 }
