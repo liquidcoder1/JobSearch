@@ -132,16 +132,22 @@ import { createClient } from '@supabase/supabase-js'
             jobDetails.className = "job_details"
 
             const jobLocation = document.createElement("span")
-            jobLocation.className = "job_location badge bg-success  me-2"
-            jobLocation.innerHTML = job.locations[0].name
+            if (job.locations.length > 0) {
+                jobLocation.className = "job_location badge bg-success  me-2"
+                jobLocation.innerHTML = job.locations[0].name
+            }
 
             const jobCategory = document.createElement("span")
-            jobCategory.className = "job_category px-2 badge bg-dark me-2"
-            jobCategory.innerHTML = job.categories[0].name
+            if (job.categories.length > 0) {
+                jobCategory.className = "job_category px-2 badge bg-dark me-2"
+                jobCategory.innerHTML = job.categories[0].name
+            }
 
             const jobLevel = document.createElement("span")
-            jobLevel.className = "job_level badge bg-warning me-2"
-            jobLevel.innerHTML = job.levels[0].name
+            if (job.levels.length > 0) {
+                jobLevel.className = "job_level badge bg-warning me-2"
+                jobLevel.innerHTML = job.levels[0].name
+            }
 
             const applyButton = document.createElement("button")
             applyButton.className = isApplied ? "btn me-2 col btn-secondary" : "btn me-2 col btn-info"
